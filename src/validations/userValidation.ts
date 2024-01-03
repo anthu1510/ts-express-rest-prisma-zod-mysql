@@ -7,7 +7,7 @@ export const userSchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string(),
-    status: Status.default('active')
+    status: Status.default('active').optional().nullable()
 });
 
 export const UserCreateInput = userSchema.omit({ id: true });

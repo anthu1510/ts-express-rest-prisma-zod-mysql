@@ -1,13 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { IUserByIdParamInput, IUserCreateInput } from "../validations/userValidation"
+import { IUserByIdParamInput, IUserCreateInput, IUser } from "../validations/userValidation"
 import { db } from "../database";
 
 class UserController {
-    getAll(req: Request, res: Response<{ message: string }>, next: NextFunction) {
+    async getAll(req: Request, res: Response<IUser[]>, next: NextFunction) {
         try {
-            res.json({
-                message: "test user controller"
-            })
+            const users = await db.users.findMany({});
+            res.json(users)
         }
         catch (ex) {
             next(ex);
