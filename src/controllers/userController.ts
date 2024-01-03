@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { IUserByIdParamInput } from "../validations/userValidation"
+import { IUserByIdParamInput, IUserCreateInput } from "../validations/userValidation"
+import { db } from "../database";
 
 class UserController {
     getAll(req: Request, res: Response<{ message: string }>, next: NextFunction) {
@@ -23,6 +24,18 @@ class UserController {
             next(ex);
         }
 
+    }
+    async create(req: Request<IUserCreateInput>, res: Response<{ message: string }>, next: NextFunction) {
+        try {
+            const userInput = req.body;
+            await db.users.create({ data: userInput })
+            res.json({
+                message: `user Created`
+            })
+        }
+        catch (ex) {
+            next(ex);
+        }
     }
 }
 
