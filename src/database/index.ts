@@ -1,4 +1,5 @@
-import { PrismaClient } from './dbSource'
-const prisma = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+
+const prisma: PrismaClient = new PrismaClient();
 
 export const db = prisma;

@@ -4,25 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd --respawn src/",
-    "build": "del-cli ./dist && tsc && node ./dist",
-    "mig": "npx prisma migrate dev --name init && npx prisma generate"
+    "dev": "tsnd --respawn src/server",
+    "build": "tsc",
+    "prebuild": "del-cli ./dist",
+    "mig": "npx prisma migrate dev --name init && npx prisma generate",
+    "premig": "del-cli ./prisma/migrations && del-cli ./src/generated",
+    "del": "del-cli ./src/generated",
+    "start": "node dist/server/index.js",
+    "rest": "npx prisma migrate reset"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/node": "^20.10.6",
+    "@types/password-hash": "^1.2.24",
     "del-cli": "^5.1.0",
     "prisma": "^5.7.1",
+    "prisma-zod-generator": "^0.8.13",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@prisma/client": "5.7.1",
+    "@prisma/client": "^5.7.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "password-hash": "^1.2.2",
     "zod": "^3.22.4",
     "zod-express-middleware": "^1.4.0"
   }

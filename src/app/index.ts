@@ -1,14 +1,17 @@
-import express, { Application } from "express";
-import userRoutes from "../routes/userRouter"
-import { errorHandler } from "../middlewares/errorHandler";
+import  express, {Application} from "express";
+import { routes } from "../routes";
+import { errorHandler } from "../middlewares/error.handler";
 
 const app: Application = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false, limit: '1mb' }))
+app.use(express.urlencoded({extended: false, limit: '1mb'}))
 
-app.use("/api/users", userRoutes)
+//routes
+routes(app);
 
-app.use(errorHandler)
+
+//handle errors
+app.use(errorHandler);
 
 export default app;

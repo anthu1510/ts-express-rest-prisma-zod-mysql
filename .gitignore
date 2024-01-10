@@ -1,4 +1,4 @@
-/node_modules
-/dist
-/src/database/dbSource
-/prisma/migrations
+node_modules
+# Keep environment variables out of version control
+dist
+prisma/migrations
